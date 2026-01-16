@@ -41,6 +41,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     await fetchProfile(user.id);
   }, [fetchProfile, user?.id]);
 
+  const refreshBalance = React.useCallback(async () => {
+    await refreshProfile();
+  }, [refreshProfile]);
+
   React.useEffect(() => {
     let active = true;
 
@@ -105,8 +109,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
       loading,
       signOut,
       refreshProfile,
+      refreshBalance,
     }),
-    [loading, refreshProfile, session, signOut, user, userProfile]
+    [loading, refreshProfile, refreshBalance, session, signOut, user, userProfile]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

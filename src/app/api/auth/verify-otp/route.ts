@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server';
 
-import { createClient } from '@/lib/supabase/server';
+import {
+  createClient,
+  createServiceRoleClient,
+} from '@/lib/supabase/server';
 import { handleAuthError } from '@/lib/utils/errors';
 import { formatPhoneNumber, validateGhanaPhone } from '@/lib/utils/phone';
+import { recordLedgerEntry } from '@/lib/services/ledger';
 
 export async function POST(request: Request) {
   try {
@@ -23,6 +27,7 @@ export async function POST(request: Request) {
 
     const formattedPhone = formatPhoneNumber(phone);
     const supabase = createClient();
+    const serviceSupabase = createServiceRoleClient();
 
     const { data, error } = await supabase.auth.verifyOtp({
       phone: formattedPhone,
@@ -44,49 +49,57 @@ export async function POST(request: Request) {
         ? user.user_metadata.full_name
         : null;
 
-    const userPayload = {
-      id: user.id,
-      phone: formattedPhone,
-      full_name: fullName,
-      paper_balance: '1000.00',
-      live_balance: '0.00',
-    };
-
-    const { error: profileError } = await supabase
+    const { data: existingProfile, error: lookupError } = await serviceSupabase
       .from('users')
-      .upsert(userPayload, { onConflict: 'id' });
-
-    if (profileError) {
-      return NextResponse.json({ error: handleAuthError(profileError) }, { status: 500 });
-    }
-
-    const { data: existingBonus, error: ledgerCheckError } = await supabase
-      .from('ledger_entries')
       .select('id')
-      .eq('user_id', user.id)
-      .eq('transaction_type', 'signup_bonus')
+      .eq('id', user.id)
       .maybeSingle();
 
-    if (ledgerCheckError) {
-      return NextResponse.json(
-        { error: handleAuthError(ledgerCheckError) },
-        { status: 500 }
-      );
+    if (lookupError) {
+      return NextResponse.json({ error: handleAuthError(lookupError) }, { status: 500 });
     }
 
-    if (!existingBonus) {
-      const { error: ledgerError } = await supabase.from('ledger_entries').insert({
-        user_id: user.id,
-        mode: 'paper',
-        transaction_type: 'signup_bonus',
-        amount: '1000.00',
-        balance_after: '1000.00',
-        metadata: { reason: 'signup_bonus' },
+    if (existingProfile) {
+      const updatePayload: {
+        phone: string;
+        full_name?: string | null;
+      } = {
+        phone: formattedPhone,
+      };
+
+      if (fullName) {
+        updatePayload.full_name = fullName;
+      }
+
+      const { error: updateError } = await serviceSupabase
+        .from('users')
+        .update(updatePayload)
+        .eq('id', user.id);
+
+      if (updateError) {
+        return NextResponse.json({ error: handleAuthError(updateError) }, { status: 500 });
+      }
+    } else {
+      const { error: insertError } = await serviceSupabase.from('users').insert({
+        id: user.id,
+        phone: formattedPhone,
+        full_name: fullName,
+      paper_balance: '0.00',
+        live_balance: '0.00',
       });
 
-      if (ledgerError) {
-        return NextResponse.json({ error: handleAuthError(ledgerError) }, { status: 500 });
+      if (insertError) {
+        return NextResponse.json({ error: handleAuthError(insertError) }, { status: 500 });
       }
+
+      await recordLedgerEntry(
+        user.id,
+        'paper',
+        1000,
+        'signup_bonus',
+        { metadata: { reason: 'signup_bonus' } },
+        { client: serviceSupabase }
+      );
     }
 
     return NextResponse.json({ success: true, user });

@@ -18,4 +18,5 @@ export interface AuthContextType {
   loading: boolean;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
+  refreshBalance: () => Promise<void>;
 }
