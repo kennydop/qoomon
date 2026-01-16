@@ -1,0 +1,16 @@
+SUBJECT: Africa's first prediction market seed funding request
+
+
+Hello [_],
+
+I’m [_], and I'm building Africa's first prediction market. We enable trading on elections, weather, economic indicators, and cultural events using a sportsbook-style interface and local mobile-money rails (MTN MoMo, AirtelTigo, Telecel).
+
+Global platforms like Kalshi and Polymarket exclude Africa, while local betting companies focus only on sports. This leaves a large, untapped market for event-based forecasting and trading across Africa. Our approach lowers the adoption barrier by abstracting market mechanics behind a familiar betting UX.
+
+We’re raising a $250k pre-seed to launch in Ghana, prove liquidity and engagement, and expand into additional African markets. We believe this becomes the default prediction-market infrastructure for the continent.
+
+Would you be open to a short intro call? Happy to share a short deck.
+
+Best regards,
+[_]
+dansooffeipatrick@gmail.com | +233249555935

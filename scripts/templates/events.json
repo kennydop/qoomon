@@ -1,0 +1,69 @@
+[
+  {
+    "category": "politics",
+    "title": "2024 Presidential Election Winner",
+    "description": "Which candidate will win the upcoming presidential election?",
+    "pricing_model": "lmsr",
+    "liquidity_parameter": 150,
+    "close_time": "2025-11-05T23:59:00Z",
+    "outcomes": [
+      { "label": "Candidate A", "initial_probability": 0.45 },
+      { "label": "Candidate B", "initial_probability": 0.45 },
+      { "label": "Runoff or Other", "initial_probability": 0.1 }
+    ]
+  },
+  {
+    "category": "sports",
+    "title": "NSMQ 2025 Champions",
+    "description": "Which school will win the National Science and Maths Quiz in 2025?",
+    "pricing_model": "lmsr",
+    "liquidity_parameter": 120,
+    "close_time": "2025-07-15T12:00:00Z",
+    "outcomes": [
+      { "label": "PRESEC Legon", "initial_probability": 0.35 },
+      { "label": "Keta SHTS", "initial_probability": 0.25 },
+      { "label": "St. Peter's", "initial_probability": 0.2 },
+      { "label": "Other Finalist", "initial_probability": 0.2 }
+    ]
+  },
+  {
+    "category": "crypto",
+    "title": "Bitcoin Price on Dec 31, 2025",
+    "description": "Where will Bitcoin close on the last day of 2025?",
+    "pricing_model": "lmsr",
+    "liquidity_parameter": 180,
+    "close_time": "2025-12-31T21:00:00Z",
+    "outcomes": [
+      { "label": "Above $150k", "initial_probability": 0.2 },
+      { "label": "$120k - $150k", "initial_probability": 0.3 },
+      { "label": "$90k - $120k", "initial_probability": 0.3 },
+      { "label": "Below $90k", "initial_probability": 0.2 }
+    ]
+  },
+  {
+    "category": "weather",
+    "title": "Will it rain in Accra on Independence Day?",
+    "description": "Rainfall in Accra on March 6, 2025 (local time).",
+    "pricing_model": "parimutuel",
+    "liquidity_parameter": 100,
+    "close_time": "2025-03-06T06:00:00Z",
+    "outcomes": [
+      { "label": "Yes", "initial_probability": 0.5 },
+      { "label": "No", "initial_probability": 0.5 }
+    ]
+  },
+  {
+    "category": "culture",
+    "title": "Ghana Music Awards 2025: Artist of the Year",
+    "description": "Who will be named Artist of the Year at the Ghana Music Awards?",
+    "pricing_model": "lmsr",
+    "liquidity_parameter": 130,
+    "close_time": "2025-06-30T18:00:00Z",
+    "outcomes": [
+      { "label": "Stonebwoy", "initial_probability": 0.28 },
+      { "label": "Sarkodie", "initial_probability": 0.26 },
+      { "label": "Black Sherif", "initial_probability": 0.26 },
+      { "label": "Other Artist", "initial_probability": 0.2 }
+    ]
+  }
+]

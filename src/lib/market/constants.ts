@@ -1,0 +1,9 @@
+export const DEFAULT_LIQUIDITY_PARAMETER = 100;
+export const MIN_LIQUIDITY_PARAMETER = 10;
+export const MAX_LIQUIDITY_PARAMETER = 10000;
+export const BINARY_SEARCH_TOLERANCE = 0.0001;
+export const BINARY_SEARCH_MAX_ITERATIONS = 50;
+export const MAX_DECIMAL_ODDS = 1000;
+export const MIN_STAKE = 0.01;
+export const SEED_SHARES = 0;
+export const SHARE_PRECISION = 6;
