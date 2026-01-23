@@ -46,7 +46,7 @@ const prices = await calculateAllPrices(eventId, supabase);
 
 ### Perform cash-out
 ```typescript
-import { cashOutBet } from '@/lib/market/helpers';
+import { cashOutBet } from '@/lib/market/cashout';
 
 const result = await cashOutBet(betId, supabase);
 ```

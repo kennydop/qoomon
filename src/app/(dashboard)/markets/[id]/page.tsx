@@ -3,11 +3,13 @@
 import * as React from 'react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
-import { Clock, TrendingUp } from 'lucide-react';
+import { Clock, TrendingUp, X } from 'lucide-react';
 
+import BettingPanel from '@/components/markets/BettingPanel';
 import ErrorState from '@/components/markets/ErrorState';
 import MarketDetailsSkeleton from '@/components/markets/MarketDetailsSkeleton';
 import PriceChart from '@/components/markets/PriceChart';
+import { useToast } from '@/contexts/ToastContext';
 import { getEventWithPrices, subscribeToOutcomeUpdates } from '@/lib/services/markets';
 import {
   formatCloseTime,
@@ -25,6 +27,8 @@ export default function MarketDetailsPage() {
   const [market, setMarket] = React.useState<EventWithPrices | null>(null);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
+  const [selectedOutcomeId, setSelectedOutcomeId] = React.useState<string | null>(null);
+  const { showToast } = useToast();
 
   const loadMarket = React.useCallback(async () => {
     if (!eventId) {
@@ -87,6 +91,7 @@ export default function MarketDetailsPage() {
   const badgeColor = getCategoryColor(category);
   const imageFallback = getEventImageFallback(category);
   const outcomesSorted = market.prices.slice().sort((a, b) => b.price - a.price);
+  const selectedOutcome = market.prices.find((outcome) => outcome.outcomeId === selectedOutcomeId);
 
   return (
     <div className="space-y-6">
@@ -170,7 +175,8 @@ export default function MarketDetailsPage() {
                 <span className="text-slate-500">{formatOdds(outcome.odds)}x</span>
                 <button
                   type="button"
-                  className="rounded-2xl bg-[var(--color-primary-500)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-lg shadow-[var(--color-primary-500)/25] transition hover:bg-[var(--color-primary-600)]"
+                  onClick={() => setSelectedOutcomeId(outcome.outcomeId)}
+                  className="rounded-2xl bg-[var(--color-primary-500)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-[var(--color-primary-500)/25] transition hover:bg-[var(--color-primary-600)]"
                 >
                   Bet
                 </button>
@@ -179,6 +185,31 @@ export default function MarketDetailsPage() {
           ))}
         </div>
       </section>
+
+      {selectedOutcome ? (
+        <div className="fixed inset-0 z-40 flex items-end justify-center bg-black/40 px-4 pb-6 md:items-start md:justify-end md:pb-0">
+          <div className="relative w-full max-w-md md:mr-6 md:mt-24">
+            <button
+              type="button"
+              onClick={() => setSelectedOutcomeId(null)}
+              className="absolute -top-10 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-white text-slate-500 shadow-lg transition hover:text-slate-700"
+            >
+              <X className="h-4 w-4" />
+            </button>
+            <BettingPanel
+              outcomeId={selectedOutcome.outcomeId}
+              outcomeLabel={selectedOutcome.label}
+              currentOdds={selectedOutcome.odds}
+              eventId={market.id}
+              onBetPlaced={async () => {
+                await loadMarket();
+                setSelectedOutcomeId(null);
+                showToast('Bet placed successfully.', 'success');
+              }}
+            />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

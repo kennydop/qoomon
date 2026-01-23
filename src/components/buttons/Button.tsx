@@ -59,11 +59,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           //#region  //*=========== Variants ===========
           [
             variant === 'primary' && [
-              'bg-primary-500 text-white',
-              'border-primary-600 border',
-              'hover:bg-primary-600 hover:text-white',
-              'active:bg-primary-700',
-              'disabled:bg-primary-700',
+              'bg-gradient-to-r from-[var(--color-primary-600)] to-[var(--color-primary-500)] text-white',
+              'border-[var(--color-primary-700)] border',
+              'hover:from-[var(--color-primary-700)] hover:to-[var(--color-primary-600)] hover:text-white',
+              'active:from-[var(--color-primary-800)] active:to-[var(--color-primary-700)]',
+              'disabled:from-[var(--color-primary-800)] disabled:to-[var(--color-primary-700)] disabled:opacity-60',
             ],
             variant === 'outline' && [
               'text-primary-500',

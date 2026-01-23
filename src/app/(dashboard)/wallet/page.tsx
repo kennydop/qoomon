@@ -82,19 +82,7 @@ export default function WalletPage() {
           )}
         </div>
 
-        <div className="mt-6 flex flex-wrap gap-3">
-          {['Deposit', 'Withdraw'].map((label) => (
-            <button
-              key={label}
-              type="button"
-              disabled
-              title={`${label} coming soon`}
-              className="flex-1 rounded-2xl border border-slate-200 bg-slate-100 px-4 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 transition disabled:cursor-not-allowed disabled:opacity-70"
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+        {/* Deposit and withdraw flows are out of scope for this UI-only update */}
       </section>
 
       {user?.id ? (

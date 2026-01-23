@@ -21,7 +21,7 @@ type MarketCardProps = {
 };
 
 const cardBase =
-  'flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-200';
+  'flex h-full flex-col overflow-hidden rounded-3xl border border-white/20 bg-white shadow-lg transition-all duration-300';
 
 export default function MarketCard({ market }: MarketCardProps) {
   const Icon = getCategoryIcon(market.category);
@@ -33,7 +33,7 @@ export default function MarketCard({ market }: MarketCardProps) {
       href={`/markets/${market.id}`}
       className={cn(
         cardBase,
-        'group hover:scale-[1.02] hover:shadow-[0_16px_32px_rgba(99,102,241,0.15)]'
+        'group hover:scale-[1.02] hover:shadow-[0_20px_40px_rgba(168,85,247,0.25)] active:scale-[0.98]'
       )}
     >
       <div className="relative h-40 w-full overflow-hidden">

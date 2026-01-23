@@ -8,6 +8,8 @@ import { z } from 'zod';
 
 const envVariables = z.object({
   NEXT_PUBLIC_SHOW_LOGGER: z.enum(['true', 'false']).optional(),
+  PAYSTACK_SECRET_KEY: z.string().min(1),
+  NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY: z.string().min(1),
 });
 
 envVariables.parse(process.env);

@@ -5,21 +5,25 @@
   /* Font configuration */
   --font-primary: 'Inter', system-ui, sans-serif;
 
-  /* Primary color palette - converted to modern oklch format */
-  --color-primary-50: oklch(0.97 0.024 213.79);
-  --color-primary-100: oklch(0.94 0.05 213.79);
-  --color-primary-200: oklch(0.86 0.1 213.79);
-  --color-primary-300: oklch(0.76 0.15 213.79);
-  --color-primary-400: oklch(0.7 0.19 213.79);
-  --color-primary-500: oklch(0.61 0.22 213.79);
-  --color-primary-600: oklch(0.52 0.2 213.79);
-  --color-primary-700: oklch(0.43 0.18 213.79);
-  --color-primary-800: oklch(0.37 0.15 213.79);
-  --color-primary-900: oklch(0.31 0.12 213.79);
-  --color-primary-950: oklch(0.18 0.07 213.79);
+  /* Primary color palette - Purple theme */
+  --color-primary-50: oklch(0.977 0.014 308.299); /* #faf5ff */
+  --color-primary-100: oklch(0.946 0.033 307.174); /* #f3e8ff */
+  --color-primary-200: oklch(0.902 0.063 306.703); /* #e9d5ff */
+  --color-primary-300: oklch(0.827 0.119 306.383); /* #d8b4fe */
+  --color-primary-400: oklch(0.714 0.203 305.504); /* #c084fc */
+  --color-primary-500: oklch(0.627 0.265 303.9); /* #a855f7 */
+  --color-primary-600: oklch(0.558 0.288 302.321); /* #9333ea */
+  --color-primary-700: oklch(0.496 0.265 301.924); /* #7e22ce */
+  --color-primary-800: oklch(0.438 0.218 303.724); /* #6b21a8 */
+  --color-primary-900: oklch(0.381 0.176 304.987); /* #581c87 */
+  --color-primary-950: oklch(0.291 0.149 302.717); /* #3b0764 */
 
   /* Dark color */
   --color-dark: #222222;
+
+  /* Dark green background for sportsbook feel */
+  --color-bg-dark-green: oklch(0.25 0.05 150); /* Deep green */
+  --color-bg-dark-green-light: oklch(0.28 0.05 150); /* Slightly lighter */
 
   /* Animation configuration */
   --animate-flicker: flicker 3s linear infinite;
@@ -123,6 +127,37 @@
   .min-h-main {
     @apply min-h-[calc(100vh-56px)];
   }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    body {
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Adjust layout padding for mobile */
+    .layout {
+      @apply w-full px-4;
+    }
+
+    /* Ensure touch targets are at least 44x44px */
+    button,
+    a {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+
+  /* Improve touch interactions */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @layer utilities {
@@ -130,8 +165,8 @@
     background-image: linear-gradient(#33333300, #33333300),
       linear-gradient(
         to right,
-        var(--color-primary-400),
-        var(--color-primary-500)
+        var(--color-primary-500),
+        var(--color-primary-600)
       );
     background-size: 100% 2px, 0 2px;
     background-position: 100% 100%, 0 100%;
@@ -147,5 +182,28 @@
   .animated-underline:hover,
   .animated-underline:focus-visible {
     background-size: 0 2px, 100% 2px;
+  }
+
+  /* Smooth transitions for interactive elements */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .transition-smooth-fast {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Tap highlight removal for mobile */
+  .tap-highlight-transparent {
+    -webkit-tap-highlight-color: transparent;
   }
 }

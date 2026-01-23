@@ -3,6 +3,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Home, LogOut, TrendingUp, User, Wallet } from 'lucide-react';
 
 import { useAuth } from '@/contexts/AuthContext';
 import { cn } from '@/lib/utils';
@@ -19,71 +20,105 @@ export default function DashboardLayout({
     await signOut();
   }, [signOut]);
 
-  const subtitle = React.useMemo(() => {
-    if (pathname?.startsWith('/markets/')) {
-      return 'Market details';
-    }
-    if (pathname === '/markets') {
-      return 'Bet on real-world events';
-    }
-    if (pathname === '/wallet') {
-      return 'Wallet dashboard';
-    }
-    return 'Qoomon dashboard';
-  }, [pathname]);
-
-  const navLinks = [
-    { href: '/markets', label: 'Markets' },
-    { href: '/wallet', label: 'Wallet' },
+  const navItems = [
+    { href: '/markets', label: 'Markets', icon: Home },
+    { href: '/portfolio', label: 'Portfolio', icon: TrendingUp },
+    { href: '/wallet', label: 'Wallet', icon: Wallet },
+    { href: '/profile', label: 'Profile', icon: User },
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      <header className="border-b border-slate-200 bg-white shadow-sm">
-        <div className="layout flex flex-wrap items-center justify-between gap-4 py-4">
-          <div className="space-y-1">
-            <p className="text-lg font-semibold text-[var(--color-primary-700)]">
+    <div className="min-h-screen bg-gradient-to-br from-[var(--color-bg-dark-green)] to-slate-900 text-white pb-20 md:pb-0">
+      {/* Mobile Header */}
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-[var(--color-bg-dark-green)]/95 backdrop-blur-sm md:hidden">
+        <div className="flex items-center justify-between px-4 py-3">
+          <div>
+            <p className="text-lg font-bold text-[var(--color-primary-400)]">
               Qoomon
             </p>
-            <p className="text-xs uppercase tracking-[0.35em] text-slate-500">
-              {subtitle}
+          </div>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="rounded-full p-2 text-white/70 transition hover:bg-white/10 hover:text-white"
+            aria-label="Logout"
+          >
+            <LogOut className="h-5 w-5" />
+          </button>
+        </div>
+      </header>
+
+      {/* Desktop Header */}
+      <header className="hidden border-b border-white/10 bg-[var(--color-bg-dark-green)]/95 backdrop-blur-sm md:block">
+        <div className="layout flex items-center justify-between py-4">
+          <div className="space-y-1">
+            <p className="text-xl font-bold text-[var(--color-primary-400)]">
+              Qoomon
+            </p>
+            <p className="text-xs uppercase tracking-[0.35em] text-white/60">
+              Prediction Markets
             </p>
           </div>
-          <nav className="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+          <nav className="flex items-center gap-2">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href;
+              const Icon = item.icon;
               return (
                 <Link
-                  key={link.href}
-                  href={link.href}
+                  key={item.href}
+                  href={item.href}
                   className={cn(
-                    'rounded-full px-3 py-2 transition',
+                    'flex items-center gap-2 rounded-2xl px-4 py-2.5 text-sm font-semibold uppercase tracking-[0.2em] transition-all duration-200',
                     isActive
-                      ? 'bg-[var(--color-primary-50)] text-[var(--color-primary-700)] shadow-[0_8px_20px_rgba(99,102,241,0.2)]'
-                      : 'hover:text-[var(--color-primary-600)]'
+                      ? 'bg-[var(--color-primary-600)] text-white shadow-lg shadow-[var(--color-primary-600)]/30'
+                      : 'text-white/70 hover:bg-white/10 hover:text-white'
                   )}
                 >
-                  {link.label}
+                  <Icon className="h-4 w-4" />
+                  {item.label}
                 </Link>
               );
             })}
-            <span className="rounded-full border border-slate-200 px-3 py-2 text-slate-400">
-              Portfolio (soon)
-            </span>
           </nav>
           <button
             type="button"
             onClick={handleLogout}
-            className={cn(
-              'rounded-2xl border border-transparent px-4 py-2 text-sm font-semibold transition',
-              'bg-[var(--color-primary-500)] text-white shadow-lg shadow-[var(--color-primary-500)/25] hover:bg-[var(--color-primary-600)]'
-            )}
+            className="rounded-2xl bg-white/10 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-white/20"
           >
             Logout
           </button>
         </div>
       </header>
-      <main className="layout py-6">{children}</main>
+
+      {/* Main Content */}
+      <main className="layout py-4 md:py-6">{children}</main>
+
+      {/* Mobile Bottom Navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-[var(--color-bg-dark-green)]/98 backdrop-blur-md md:hidden">
+        <div className="grid grid-cols-4 gap-1 px-2 py-2">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  'flex flex-col items-center gap-1 rounded-2xl px-3 py-2.5 transition-all duration-200',
+                  isActive
+                    ? 'bg-[var(--color-primary-600)] text-white shadow-lg shadow-[var(--color-primary-600)]/40'
+                    : 'text-white/60 active:bg-white/10'
+                )}
+              >
+                <Icon className={cn('h-5 w-5', isActive && 'animate-in zoom-in-50 duration-200')} />
+                <span className="text-[0.65rem] font-semibold uppercase tracking-wider">
+                  {item.label}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
     </div>
   );
 }

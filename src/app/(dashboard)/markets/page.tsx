@@ -105,12 +105,12 @@ export default function MarketsPage() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+      <section className="rounded-3xl border border-white/20 bg-white/95 backdrop-blur-sm p-5 md:p-6 shadow-xl">
         <div className="flex flex-col gap-2">
-          <p className="h1">Markets</p>
-          <p className="text-sm text-slate-500">Bet on real-world events.</p>
+          <p className="h1 text-slate-900">Markets</p>
+          <p className="text-sm text-slate-600">Bet on real-world events.</p>
         </div>
-        <div className="mt-6 flex gap-3 overflow-x-auto pb-2">
+        <div className="mt-4 md:mt-6 flex gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide">
           {categories.map((category) => {
             const isActive = category === activeCategory;
             return (
@@ -119,10 +119,10 @@ export default function MarketsPage() {
                 type="button"
                 onClick={() => setActiveCategory(category)}
                 className={cn(
-                  'whitespace-nowrap rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] transition',
+                  'whitespace-nowrap rounded-full border px-3 md:px-4 py-1.5 md:py-2 text-[0.65rem] md:text-xs font-semibold uppercase tracking-[0.25em] md:tracking-[0.3em] transition-all duration-200',
                   isActive
-                    ? 'border-transparent bg-[var(--color-primary-500)] text-white shadow-lg shadow-[var(--color-primary-500)/20]'
-                    : 'border-slate-200 bg-white text-slate-500 hover:border-[var(--color-primary-200)]'
+                    ? 'border-transparent bg-[var(--color-primary-600)] text-white shadow-[var(--color-primary-600)/30] scale-105'
+                    : 'border-slate-300 bg-white text-slate-600 hover:border-[var(--color-primary-300)] active:scale-95'
                 )}
               >
                 {category}
@@ -153,7 +153,7 @@ export default function MarketsPage() {
           </p>
         </section>
       ) : (
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 md:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {visibleMarkets.map((market) => (
             <MarketCard key={market.id} market={market} />
           ))}

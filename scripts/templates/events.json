@@ -1,69 +1,177 @@
 [
   {
     "category": "politics",
-    "title": "2024 Presidential Election Winner",
-    "description": "Which candidate will win the upcoming presidential election?",
+    "title": "Ghana 2026 Parliamentary Majority",
+    "description": "Which party will secure a majority of seats after the 2026 parliamentary elections?",
     "pricing_model": "lmsr",
-    "liquidity_parameter": 150,
-    "close_time": "2025-11-05T23:59:00Z",
+    "liquidity_parameter": 160,
+    "close_time": "2026-12-05T23:59:00Z",
     "outcomes": [
-      { "label": "Candidate A", "initial_probability": 0.45 },
-      { "label": "Candidate B", "initial_probability": 0.45 },
-      { "label": "Runoff or Other", "initial_probability": 0.1 }
+      { "label": "NPP Majority", "initial_probability": 0.44 },
+      { "label": "NDC Majority", "initial_probability": 0.44 },
+      { "label": "Hung Parliament", "initial_probability": 0.12 }
+    ]
+  },
+  {
+    "category": "politics",
+    "title": "EC Constitutional Referendum Passage",
+    "description": "Will the proposed constitutional referendum on decentralization reforms pass with over 50% approval?",
+    "pricing_model": "parimutuel",
+    "liquidity_parameter": 120,
+    "close_time": "2026-06-15T20:00:00Z",
+    "outcomes": [
+      { "label": "Passes", "initial_probability": 0.52 },
+      { "label": "Fails", "initial_probability": 0.48 }
+    ]
+  },
+  {
+    "category": "politics",
+    "title": "Next Bank of Ghana Governor Appointment",
+    "description": "Who will be appointed as the next Bank of Ghana Governor when the current term ends?",
+    "pricing_model": "lmsr",
+    "liquidity_parameter": 140,
+    "close_time": "2026-09-01T08:00:00Z",
+    "outcomes": [
+      { "label": "Incumbent Reappointed", "initial_probability": 0.35 },
+      { "label": "Deputy Promoted", "initial_probability": 0.35 },
+      { "label": "External Appointee", "initial_probability": 0.3 }
     ]
   },
   {
     "category": "sports",
-    "title": "NSMQ 2025 Champions",
-    "description": "Which school will win the National Science and Maths Quiz in 2025?",
+    "title": "NSMQ 2026 Grand Final Winner",
+    "description": "Which school wins the National Science and Maths Quiz 2026?",
     "pricing_model": "lmsr",
-    "liquidity_parameter": 120,
-    "close_time": "2025-07-15T12:00:00Z",
+    "liquidity_parameter": 130,
+    "close_time": "2026-07-18T12:00:00Z",
     "outcomes": [
-      { "label": "PRESEC Legon", "initial_probability": 0.35 },
-      { "label": "Keta SHTS", "initial_probability": 0.25 },
-      { "label": "St. Peter's", "initial_probability": 0.2 },
-      { "label": "Other Finalist", "initial_probability": 0.2 }
+      { "label": "PRESEC Legon", "initial_probability": 0.33 },
+      { "label": "Keta SHTS", "initial_probability": 0.24 },
+      { "label": "St. James", "initial_probability": 0.2 },
+      { "label": "Other Finalist", "initial_probability": 0.23 }
+    ]
+  },
+  {
+    "category": "sports",
+    "title": "Ghana Premier League 2026 Champion",
+    "description": "Which club lifts the Ghana Premier League trophy for the 2025/26 season?",
+    "pricing_model": "lmsr",
+    "liquidity_parameter": 150,
+    "close_time": "2026-05-30T15:00:00Z",
+    "outcomes": [
+      { "label": "Asante Kotoko", "initial_probability": 0.32 },
+      { "label": "Accra Hearts of Oak", "initial_probability": 0.3 },
+      { "label": "Medeama SC", "initial_probability": 0.2 },
+      { "label": "Field", "initial_probability": 0.18 }
+    ]
+  },
+  {
+    "category": "sports",
+    "title": "Black Stars AFCON Qualifier vs Nigeria",
+    "description": "Match result for Ghana vs Nigeria in the 2026 AFCON qualifier window.",
+    "pricing_model": "parimutuel",
+    "liquidity_parameter": 110,
+    "close_time": "2026-03-20T16:00:00Z",
+    "outcomes": [
+      { "label": "Ghana Win", "initial_probability": 0.38 },
+      { "label": "Draw", "initial_probability": 0.28 },
+      { "label": "Nigeria Win", "initial_probability": 0.34 }
     ]
   },
   {
     "category": "crypto",
-    "title": "Bitcoin Price on Dec 31, 2025",
-    "description": "Where will Bitcoin close on the last day of 2025?",
+    "title": "Bitcoin Price on Dec 31, 2026",
+    "description": "Where will Bitcoin close on the final day of 2026 (UTC close)?",
     "pricing_model": "lmsr",
-    "liquidity_parameter": 180,
-    "close_time": "2025-12-31T21:00:00Z",
+    "liquidity_parameter": 200,
+    "close_time": "2026-12-31T21:00:00Z",
     "outcomes": [
-      { "label": "Above $150k", "initial_probability": 0.2 },
-      { "label": "$120k - $150k", "initial_probability": 0.3 },
-      { "label": "$90k - $120k", "initial_probability": 0.3 },
-      { "label": "Below $90k", "initial_probability": 0.2 }
+      { "label": "Above $180k", "initial_probability": 0.22 },
+      { "label": "$140k - $180k", "initial_probability": 0.28 },
+      { "label": "$100k - $140k", "initial_probability": 0.3 },
+      { "label": "Below $100k", "initial_probability": 0.2 }
+    ]
+  },
+  {
+    "category": "crypto",
+    "title": "Ethereum Staking Share Q4 2026",
+    "description": "What percentage of ETH supply will be staked by end of Q4 2026?",
+    "pricing_model": "lmsr",
+    "liquidity_parameter": 150,
+    "close_time": "2026-10-01T00:00:00Z",
+    "outcomes": [
+      { "label": "Above 30%", "initial_probability": 0.25 },
+      { "label": "27% - 30%", "initial_probability": 0.3 },
+      { "label": "24% - 27%", "initial_probability": 0.25 },
+      { "label": "Below 24%", "initial_probability": 0.2 }
     ]
   },
   {
     "category": "weather",
-    "title": "Will it rain in Accra on Independence Day?",
-    "description": "Rainfall in Accra on March 6, 2025 (local time).",
+    "title": "Accra Rainfall on Independence Day 2026",
+    "description": "Rainfall in Accra on March 6, 2026 (local time).",
     "pricing_model": "parimutuel",
     "liquidity_parameter": 100,
-    "close_time": "2025-03-06T06:00:00Z",
+    "close_time": "2026-03-06T06:00:00Z",
     "outcomes": [
-      { "label": "Yes", "initial_probability": 0.5 },
-      { "label": "No", "initial_probability": 0.5 }
+      { "label": "Yes", "initial_probability": 0.48 },
+      { "label": "No", "initial_probability": 0.52 }
+    ]
+  },
+  {
+    "category": "weather",
+    "title": "Harmattan Duration in Accra 2026/27",
+    "description": "How long will the harmattan conditions persist in Accra during the 2026/27 season?",
+    "pricing_model": "lmsr",
+    "liquidity_parameter": 90,
+    "close_time": "2026-12-01T07:00:00Z",
+    "outcomes": [
+      { "label": "< 4 weeks", "initial_probability": 0.25 },
+      { "label": "4-6 weeks", "initial_probability": 0.35 },
+      { "label": "6-8 weeks", "initial_probability": 0.25 },
+      { "label": "> 8 weeks", "initial_probability": 0.15 }
     ]
   },
   {
     "category": "culture",
-    "title": "Ghana Music Awards 2025: Artist of the Year",
-    "description": "Who will be named Artist of the Year at the Ghana Music Awards?",
+    "title": "Ghana Music Awards 2026: Artist of the Year",
+    "description": "Who will be named Artist of the Year at the 2026 Ghana Music Awards?",
     "pricing_model": "lmsr",
-    "liquidity_parameter": 130,
-    "close_time": "2025-06-30T18:00:00Z",
+    "liquidity_parameter": 140,
+    "close_time": "2026-06-28T18:00:00Z",
     "outcomes": [
-      { "label": "Stonebwoy", "initial_probability": 0.28 },
-      { "label": "Sarkodie", "initial_probability": 0.26 },
+      { "label": "Stonebwoy", "initial_probability": 0.26 },
+      { "label": "Sarkodie", "initial_probability": 0.25 },
       { "label": "Black Sherif", "initial_probability": 0.26 },
-      { "label": "Other Artist", "initial_probability": 0.2 }
+      { "label": "Other Artist", "initial_probability": 0.23 }
+    ]
+  },
+  {
+    "category": "culture",
+    "title": "December in GH 2026 Tourism Arrivals",
+    "description": "International arrivals to Ghana during December in GH 2026 season.",
+    "pricing_model": "lmsr",
+    "liquidity_parameter": 170,
+    "close_time": "2026-12-15T10:00:00Z",
+    "outcomes": [
+      { "label": "Above 200k", "initial_probability": 0.28 },
+      { "label": "160k - 200k", "initial_probability": 0.32 },
+      { "label": "120k - 160k", "initial_probability": 0.24 },
+      { "label": "Below 120k", "initial_probability": 0.16 }
+    ]
+  },
+  {
+    "category": "culture",
+    "title": "West African Box Office Leader 2026",
+    "description": "Which film leads the West African box office gross for 2026?",
+    "pricing_model": "lmsr",
+    "liquidity_parameter": 110,
+    "close_time": "2026-11-15T20:00:00Z",
+    "outcomes": [
+      { "label": "Nollywood Blockbuster", "initial_probability": 0.32 },
+      { "label": "Hollywood Release", "initial_probability": 0.36 },
+      { "label": "Local Ghanaian Film", "initial_probability": 0.18 },
+      { "label": "Animated Feature", "initial_probability": 0.14 }
     ]
   }
 ]

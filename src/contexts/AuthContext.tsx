@@ -46,6 +46,27 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, [refreshProfile]);
 
   React.useEffect(() => {
+    if (!user?.id) {
+      return;
+    }
+
+    const channel = supabase
+      .channel(`user-balance:${user.id}`)
+      .on(
+        'postgres_changes',
+        { event: 'UPDATE', schema: 'public', table: 'users', filter: `id=eq.${user.id}` },
+        () => {
+          void refreshProfile();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [refreshProfile, user?.id]);
+
+  React.useEffect(() => {
     let active = true;
 
     const init = async () => {

@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 
+import { getStoredWalletMode, setStoredWalletMode } from '@/lib/services/wallet';
 import { cn } from '@/lib/utils';
 import type { WalletMode } from '@/types/wallet';
 
@@ -27,7 +28,7 @@ export default function ModeToggle({ currentMode, onChange }: ModeToggleProps) {
       return;
     }
 
-    const stored = window.localStorage.getItem('walletMode') as WalletMode | null;
+    const stored = getStoredWalletMode(currentMode);
     if (stored && stored !== currentMode) {
       onChange(stored);
     }
@@ -39,9 +40,7 @@ export default function ModeToggle({ currentMode, onChange }: ModeToggleProps) {
       return;
     }
     onChange(mode);
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('walletMode', mode);
-    }
+    setStoredWalletMode(mode);
   };
 
   return (
@@ -55,10 +54,10 @@ export default function ModeToggle({ currentMode, onChange }: ModeToggleProps) {
               type="button"
               onClick={() => setMode(id)}
               className={cn(
-                'flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-semibold transition duration-200',
-                isActive
-                  ? 'bg-[var(--color-primary-600)] text-white shadow-lg shadow-[var(--color-primary-600)/40]'
-                  : 'text-slate-500 hover:text-slate-700'
+              'flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] transition-all duration-300',
+              isActive
+                ? 'bg-[var(--color-primary-600)] text-white shadow-lg shadow-[var(--color-primary-600)]/30 scale-105'
+                : 'bg-white/50 text-slate-600 hover:bg-white/80 active:scale-95'
               )}
             >
               <Icon className="h-4 w-4" />

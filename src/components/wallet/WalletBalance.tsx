@@ -13,7 +13,7 @@ type WalletBalanceProps = {
 };
 
 const cardBase =
-  'flex flex-col justify-between gap-3 rounded-3xl border p-6 shadow-sm transition duration-200';
+  'flex flex-col justify-between gap-3 rounded-3xl border p-5 md:p-6 shadow-lg transition-all duration-300';
 
 export default function WalletBalance({
   paperBalance,
@@ -36,7 +36,7 @@ export default function WalletBalance({
   ];
 
   return (
-    <div className="grid gap-4 md:grid-cols-2">
+    <div className="grid gap-3 md:gap-4 grid-cols-1 sm:grid-cols-2">
       {cards.map(({ mode, label, balance, icon: Icon }) => {
         const isActive = currentMode === mode;
         return (
@@ -45,8 +45,8 @@ export default function WalletBalance({
             className={cn(
               cardBase,
               isActive
-                ? 'border-[var(--color-primary-500)] bg-[var(--color-primary-50)] shadow-[0_10px_30px_rgba(98,0,238,0.15)]'
-                : 'border-slate-200 bg-white text-slate-600'
+                ? 'border-[var(--color-primary-500)] bg-gradient-to-br from-[var(--color-primary-50)] to-white shadow-[0_20px_50px_rgba(168,85,247,0.25)] scale-[1.02]'
+                : 'border-white/30 bg-white/90 backdrop-blur-sm text-slate-600 hover:border-white/50'
             )}
             style={
               isActive

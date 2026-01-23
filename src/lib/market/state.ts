@@ -8,7 +8,37 @@ import { calculateParimutuelOdds } from './parimutuel';
 import type { MarketState, OutcomePrices, PricingConfig } from './types';
 
 const PRICE_CACHE_TTL_MS = 1000;
+const CASHOUT_CACHE_TTL_MS = 1000;
 const priceCache = new Map<string, { timestamp: number; data: OutcomePrices[] }>();
+const cashoutPreviewCache = new Map<
+  string,
+  { timestamp: number; data: { payout: number; exitPrice: number; priceChange: number; slippage: number } }
+>();
+
+export type CashoutPreview = {
+  payout: number;
+  exitPrice: number;
+  priceChange: number;
+  slippage: number;
+};
+
+export function getCachedCashoutPreview(key: string): CashoutPreview | null {
+  const cached = cashoutPreviewCache.get(key);
+  if (!cached) {
+    return null;
+  }
+
+  if (Date.now() - cached.timestamp > CASHOUT_CACHE_TTL_MS) {
+    cashoutPreviewCache.delete(key);
+    return null;
+  }
+
+  return cached.data;
+}
+
+export function setCachedCashoutPreview(key: string, preview: CashoutPreview): void {
+  cashoutPreviewCache.set(key, { timestamp: Date.now(), data: preview });
+}
 
 export async function fetchMarketState(
   eventId: string,

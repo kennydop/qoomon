@@ -5,5 +5,7 @@ export const BINARY_SEARCH_TOLERANCE = 0.0001;
 export const BINARY_SEARCH_MAX_ITERATIONS = 50;
 export const MAX_DECIMAL_ODDS = 1000;
 export const MIN_STAKE = 0.01;
+export const MIN_CASHOUT_VALUE = 0.01;
+export const CASHOUT_SLIPPAGE_TOLERANCE = 0.05;
 export const SEED_SHARES = 0;
 export const SHARE_PRECISION = 6;
